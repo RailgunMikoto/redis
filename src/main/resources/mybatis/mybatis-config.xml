@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <settings>
+        <!--关闭缓存，多机环境 数据更新 不会刷新缓存-->
+        <setting name="cacheEnabled" value="false"/>
+        <!--开启驼峰匹配-->
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+        <!--允许主键生成-->
+        <setting name="useGeneratedKeys" value="true"/>
+        <!--配置默认的执行器。SIMPLE 就是普通的执行器；
+        REUSE 执行器会重用预处理语句（prepared statements）；
+        BATCH 执行器将重用语句并执行批量更新。
+	请自行百度，这部分内容不会详细介绍，涉及到架构设计，跟我们暂时还不沾边
+	https://blog.csdn.net/qingtian211/article/details/81838042
+        -->
+        <setting name="defaultExecutorType" value="REUSE"/>
+        <setting name="defaultStatementTimeout" value="600"/>
+    </settings>
+    <!--修改mybatis别名-->
+    <typeAliases>
+        <package name="com.wxy.redis.entity"/>
+    </typeAliases>
+    <!--指定mapper配置文件-->
+    <mappers>
+        <mapper resource="mapper/CategoryMapper.xml"/>
+        <mapper resource="mapper/ProductMapper.xml"/>
+        <mapper resource="mapper/CartMapper.xml"/>
+        <mapper resource="mapper/UserMapper.xml"/>
+    </mappers>
+</configuration>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wxy.redis.mapper.CartMapper">
+
+    <sql id="base">
+        id, user_id, product_id, quantity, checked
+    </sql>
+
+    <resultMap id="result" type="cart">
+        <id column="id" property="id" javaType="INTEGER" jdbcType="INTEGER"></id>
+        <result column="user_id" property="userId" javaType="INTEGER" jdbcType="INTEGER"></result>
+        <result column="quantity" property="quantity" javaType="INTEGER" jdbcType="INTEGER"></result>
+        <result column="product_id" property="productId" javaType="INTEGER" jdbcType="INTEGER"></result>
+        <result column="checked" property="checked" javaType="INTEGER" jdbcType="INTEGER"></result>
+    </resultMap>
+
+    <select id="findByUserId" resultMap="result">
+        select
+        <include refid="base" />
+        from xmcc_cart where user_id = #{userId};
+    </select>
+
+    <insert id="save" parameterType="cart">
+        insert into xmcc_cart(user_id, product_id, quantity, checked) values(#{userId}, #{productId}, #{quantity}, #{checked});
+    </insert>
+
+    <update id="update">
+        update xmcc_cart set quantity = #{quantity} where user_id = #{userId} and product_id = #{productId};
+    </update>
+</mapper>
